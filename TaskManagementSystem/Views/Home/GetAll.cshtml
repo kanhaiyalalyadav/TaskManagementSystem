@@ -44,7 +44,7 @@
 						<td>@task.TaskRemarks</td>
 						<td>@task.CreatedOn.ToString("dd-MM-yyyy")</td>
 						<td>@(task.LastUpdatedOn.HasValue ? @task.LastUpdatedOn.Value.ToString("dd MMM yyyy hh:mm tt") : "Not updated")</td>
-						<td><button class="btn btn-sm btn-primary" onclick="Edit(@task.TaskID)">Edit</button>&nbsp;<button class="btn btn-sm btn-secondary" onclick="Information(@task.TaskID)">Detail</button>&nbsp;<button class="btn btn-sm btn-danger" onclick="DeleteTask(@task.TaskID)">Delete</button></td>
+						<td width="200px"><button class="btn btn-sm btn-primary" onclick="Edit(@task.TaskID)">Edit</button>&nbsp;<button class="btn btn-sm btn-secondary" onclick="Information(@task.TaskID)">Detail</button>&nbsp;<button class="btn btn-sm btn-danger" onclick="DeleteTask(@task.TaskID)">Delete</button></td>
 					</tr>
 				}
 			}
