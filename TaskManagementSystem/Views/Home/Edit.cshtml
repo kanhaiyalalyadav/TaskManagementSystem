@@ -1,0 +1,66 @@
+﻿@model TaskModel
+
+@{
+	ViewData["Title"] = Model.TaskID == 0 ? "Add Task" : "Edit Task";
+	string CurrentDate = ViewBag.CurrentDate;
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<input type="hidden" asp-for="TaskID" />
+
+<div class="row">
+	<div class="col-sm-4">
+		<label asp-for="TaskTitle">TaskTitle:</label>
+		<input asp-for="TaskTitle" class="form-control" />
+	</div>
+	<div class="col-sm-4">
+		<label asp-for="TaskDueDate">TaskDueDate:</label>
+		<input asp-for="TaskDueDate" type="date" value="@CurrentDate" class="form-control" />
+	</div>
+	<div class="col-sm-4">
+		<label asp-for="TaskStatus">TaskStatus:</label>
+		<select asp-for="TaskStatus" class="form-control">
+			<option value="0">Select Status:</option>
+			<option value="Pending">Pending</option>
+			<option value="In Progress">In Progress</option>
+			<option value="Completed">Completed</option>
+		</select>
+	</div>
+	<div class="col-sm-6">
+		<label asp-for="TaskDescription">TaskDescription:</label>
+		<textarea asp-for="TaskDescription" class="form-control"></textarea>
+	</div>
+	<div class="col-sm-6">
+		<label asp-for="TaskRemarks">TaskRemarks:</label>
+		<textarea asp-for="TaskRemarks" class="form-control"></textarea>
+	</div>
+</div>
+<br />
+
+<input type="hidden" asp-for="CreatedBy" value="Admin" />
+<input type="hidden" asp-for="LastUpdatedBy" value="Admin" />
+
+<button type="button" class="btn btn-primary btn-sm-6" id="btnSave">Save</button>
+<button type="button" class="btn btn-danger btn-sm-6" onclick="loadData()">Back To List</button>
+	<script>
+		$('#btnSave').click(function(result){
+		let param={
+				TaskID:$('#TaskID').val(),
+				TaskTitle:$('#TaskTitle').val(),
+				TaskDueDate:$('#TaskDueDate').val(),
+				TaskStatus:$('#TaskStatus').val(),
+				TaskDescription:$('#TaskDescription').val(),
+				TaskRemarks:$('#TaskRemarks').val(),
+				CreatedBy:$('#CreatedBy').val(),
+				LastUpdatedBy:$('#LastUpdatedBy').val()
+		};
+		$.post('/Home/Save',param).done(function(result){
+			alert('Data Saved Sucessfully')
+		window.location.href=window.location.href;
+		}).fail(function(xhr){
+		console.log(xhr.result);
+		});
+		});
+	</script>
+

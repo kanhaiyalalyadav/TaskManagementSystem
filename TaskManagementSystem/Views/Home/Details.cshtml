@@ -1,0 +1,39 @@
+﻿@model TaskModel
+@{
+	ViewData["Title"] = "Task Details";
+}
+<h4>@ViewData["Title"]</h4>
+<div>
+	<dl class="row">
+		<dt class="col-sm-3">
+			Title:
+		</dt>
+		<dd class="col-sm-9">@Model.TaskTitle</dd>
+		<dt class="col-sm-3">
+			Description:
+		</dt>
+		<dd class="col-sm-9">@Model.TaskDescription</dd>
+		<dt class="col-sm-3">
+			DeadLine:
+		</dt>
+		<dd class="col-sm-9">@Model.TaskDueDate.ToString("dd-MM-yyyy")</dd>
+		<dt class="col-sm-3">
+			Status:
+		</dt>
+		<dd class="col-sm-9">@Model.TaskStatus</dd>
+		<dt class="col-sm-3">
+			Remarks:
+		</dt>
+		<dd class="col-sm-9">@Model.TaskRemarks</dd>
+		<dt class="col-sm-3">
+			CreatedOn:
+		</dt>
+		<dd class="col-sm-9">@Model.CreatedOn.ToString("dd MMMM yyyy")</dd>
+	</dl>
+	<dt class="col-sm-3">
+		LastUpdatedOn:
+	</dt>
+	<dd class="col-sm-9">@(Model.LastUpdatedOn.HasValue?@Model.LastUpdatedOn.Value.ToString("dd MMM yyyy hh:mm tt"):"Not updated")</dd>
+</div>
+<button type="button" class="btn btn-primary btn-sm-6" onclick="Edit(@Model.TaskID)">Edit</button>
+<button type="button" class="btn btn-danger btn-sm-6" onclick="loadData()">Back To List</button>

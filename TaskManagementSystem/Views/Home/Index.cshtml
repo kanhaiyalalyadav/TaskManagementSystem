@@ -1,0 +1,42 @@
+﻿
+
+<div id="partialView"></div>
+
+@section Scripts {
+	<script>
+			function loadData(){
+				$.post('/Home/GetAll').done(function(result){
+				  $('#partialView').html(result);
+				}).fail(function(){
+				   alert('error');
+				});
+			}
+			loadData();
+			 function Edit(Id){
+				 $.post('/Home/Edit',{Id:Id}).done(function(result){
+					 $('#partialView').html(result);
+				 }).fail(function(xhr){
+				 alert('error');
+				 });
+			 }
+				function DeleteTask(Id) {
+			if (confirm("Are you sure you want to delete this item?")) {
+				$.post('/Home/DeleteTask', { Id: Id })
+					.done(function (result) {
+						alert('Deleted!!');
+						loadData(); 
+					})
+					.fail(function (xhr) {
+						console.log(xhr.responseText);
+					});
+			}
+		}
+			  function Information(Id){
+				  $.post('/Home/Details',{Id:Id}).done(function(result){
+					  $('#partialView').html(result);
+				  }).fail(function(xhr){
+				  alert('error');
+				  });
+			  };
+	</script>
+}
